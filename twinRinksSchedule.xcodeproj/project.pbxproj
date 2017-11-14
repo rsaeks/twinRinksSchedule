@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		505AC844CBD23971E7DAC64C /* Pods_twinRinksSchedule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A0AB45E659917B722797C07 /* Pods_twinRinksSchedule.framework */; };
 		D5CC9CC81FBA75DD00FA554C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC9CC71FBA75DD00FA554C /* AppDelegate.swift */; };
 		D5CC9CCA1FBA75DD00FA554C /* scheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC9CC91FBA75DD00FA554C /* scheduleVC.swift */; };
 		D5CC9CCC1FBA75DD00FA554C /* checkinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC9CCB1FBA75DD00FA554C /* checkinVC.swift */; };
@@ -19,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A0AB45E659917B722797C07 /* Pods_twinRinksSchedule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_twinRinksSchedule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		677580EC3FC45D497C3F48F9 /* Pods-twinRinksSchedule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twinRinksSchedule.debug.xcconfig"; path = "Pods/Target Support Files/Pods-twinRinksSchedule/Pods-twinRinksSchedule.debug.xcconfig"; sourceTree = "<group>"; };
+		CAF0A6588DF48B53D06E2573 /* Pods-twinRinksSchedule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twinRinksSchedule.release.xcconfig"; path = "Pods/Target Support Files/Pods-twinRinksSchedule/Pods-twinRinksSchedule.release.xcconfig"; sourceTree = "<group>"; };
 		D5CC9CC41FBA75DD00FA554C /* twinRinksSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twinRinksSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5CC9CC71FBA75DD00FA554C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5CC9CC91FBA75DD00FA554C /* scheduleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = scheduleVC.swift; sourceTree = "<group>"; };
@@ -37,17 +41,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				505AC844CBD23971E7DAC64C /* Pods_twinRinksSchedule.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		745AA81B8251EEFFD604FFAB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2A0AB45E659917B722797C07 /* Pods_twinRinksSchedule.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A2A264AE00362D2A42CCA7D0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				677580EC3FC45D497C3F48F9 /* Pods-twinRinksSchedule.debug.xcconfig */,
+				CAF0A6588DF48B53D06E2573 /* Pods-twinRinksSchedule.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D5CC9CBB1FBA75DD00FA554C = {
 			isa = PBXGroup;
 			children = (
 				D5CC9CC61FBA75DD00FA554C /* twinRinksSchedule */,
 				D5CC9CC51FBA75DD00FA554C /* Products */,
+				A2A264AE00362D2A42CCA7D0 /* Pods */,
+				745AA81B8251EEFFD604FFAB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,9 +107,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5CC9CD81FBA75DD00FA554C /* Build configuration list for PBXNativeTarget "twinRinksSchedule" */;
 			buildPhases = (
+				B2FCA8BA7E1590A1D35DE9DB /* [CP] Check Pods Manifest.lock */,
 				D5CC9CC01FBA75DD00FA554C /* Sources */,
 				D5CC9CC11FBA75DD00FA554C /* Frameworks */,
 				D5CC9CC21FBA75DD00FA554C /* Resources */,
+				C66070ABF48F3CC7DC0F6AC6 /* [CP] Embed Pods Frameworks */,
+				EE7F88D31377F1C072329B09 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -142,6 +169,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B2FCA8BA7E1590A1D35DE9DB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-twinRinksSchedule-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C66070ABF48F3CC7DC0F6AC6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-twinRinksSchedule/Pods-twinRinksSchedule-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-twinRinksSchedule/Pods-twinRinksSchedule-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EE7F88D31377F1C072329B09 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-twinRinksSchedule/Pods-twinRinksSchedule-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D5CC9CC01FBA75DD00FA554C /* Sources */ = {
@@ -288,6 +369,7 @@
 		};
 		D5CC9CD91FBA75DD00FA554C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 677580EC3FC45D497C3F48F9 /* Pods-twinRinksSchedule.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -303,6 +385,7 @@
 		};
 		D5CC9CDA1FBA75DD00FA554C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAF0A6588DF48B53D06E2573 /* Pods-twinRinksSchedule.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

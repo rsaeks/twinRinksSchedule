@@ -1,0 +1,6 @@
+framework module Pods_twinRinksSchedule {
+  umbrella header "Pods-twinRinksSchedule-umbrella.h"
+
+  export *
+  module * { export * }
+}
