@@ -1,12 +1,15 @@
 PODS:
-  - SwiftSoup (1.5.8)
+  - Alamofire (4.5.1)
+  - Fuzi (2.0.1)
 
 DEPENDENCIES:
-  - SwiftSoup
+  - Alamofire
+  - Fuzi
 
 SPEC CHECKSUMS:
-  SwiftSoup: 86a1f5ad07b7e3d14ab1a9324a58c75ae2215e79
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  Fuzi: f64983dea705491d3aedd32351247a09523e7efd
 
-PODFILE CHECKSUM: e5eb042f66c42603380da6d25b7bbf847438d88b
+PODFILE CHECKSUM: 03d51464d0eac588c5c4d78580faecec6b547d4b
 
 COCOAPODS: 1.4.0.beta.2

@@ -6,5 +6,6 @@ target 'twinRinksSchedule' do
   use_frameworks!
 
   # Pods for twinRinksSchedule
-  pod 'SwiftSoup'
+  pod 'Fuzi';
+  pod 'Alamofire'
 end
