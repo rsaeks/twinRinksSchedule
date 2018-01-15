@@ -25,91 +25,112 @@ class settingsController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var teamThreeStackView: UIStackView!
     @IBOutlet weak var teamThreePicker: UIPickerView!
     
+    
 
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return leagueTeam.count
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return leagueTeam[component].count
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return leagueTeam[component][row]
     }
     
+    @IBAction func numberOfTeamsChanged(_ sender: Any) {
+        print("Now working on the following number of teams: \(numberOfTeams.text ?? "1")")
+        if numberOfTeams.text == "1" {
+            teamTwoStackView.isHidden = true
+            teamThreeStackView.isHidden = true
+        }
+        else if numberOfTeams.text == "2" {
+            teamTwoStackView.isHidden = false
+            teamThreeStackView.isHidden = true
+        }
+        else if numberOfTeams.text == "3" {
+            teamThreeStackView.isHidden = false
+        }
+    }
+    
+
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         //print("selected League: \(component)")
         //print("selected team: \(row)")
         if pickerView.tag == 0 {
-        switch (component) {
-        case 0:
-            if row == 0 { selectedLeague = "" }
-            else if row == 1 {
-                //print("Selected League: \(leagueTeam[component][row])")
-                selectedLeague = "Leisure"
-                let leisureArray = Array(leisureTeams)
-                leagueTeam = [leagues,leisureArray.sorted{ $0 < $1} ]
-                self.teamOnePicker.reloadComponent(1)
-            }
-            else if row == 2 {
-                selectedLeague = "Bronze"
-                let bronzeArray = Array(bronzeTeams)
-                leagueTeam = [leagues,bronzeArray.sorted{ $0 < $1} ]
-                self.teamOnePicker.reloadComponent(1)
-            }
-            else if row == 3 {
-                selectedLeague = "Silver"
-                let silverArray = Array(silverTeams)
-                leagueTeam = [leagues,silverArray.sorted{ $0 < $1} ]
-                self.teamOnePicker.reloadComponent(1)
-            }
-            else if row == 4 {
-                selectedLeague = "Gold"
-                let goldArray = Array(goldTeams)
-                leagueTeam = [leagues,goldArray.sorted{ $0 < $1} ]
-                self.teamOnePicker.reloadComponent(1)
-            }
-            else if row == 5 {
-                selectedLeague = "Platinum"
-                let platinumArray = Array(platinumTeams)
-                leagueTeam = [leagues,platinumArray.sorted{ $0 < $1} ]
-                self.teamOnePicker.reloadComponent(1)
-            }
-            else if row == 6 {
-                selectedLeague = "Diamond"
-                let diamondArray = Array(diamondTeams)
-                leagueTeam = [leagues,diamondArray.sorted{ $0 < $1} ]
-                self.teamOnePicker.reloadComponent(1)
-            }
-            print("Selected League: \(leagueTeam[component][row])")
-            
-        case 1:
-            print("Team selected: \(leagueTeam[component][row])")
-            player.shared.teamData[pickerView.tag].league = selectedLeague
-            player.shared.teamData[pickerView.tag].team = leagueTeam[component][row]
-            defaults.set(selectedLeague, forKey: "savedLeague1")
-            defaults.set(leagueTeam[component][row], forKey: "savedTeam1")
-            //player.shared.teamData.append((league:selectedLeague, team: leagueTeam[component][row]))
-        default: break
+            switch (component) {
+                case 0:
+                    if row == 0 { selectedLeague = "" }
+                    else if row == 1 {
+                        //print("Selected League: \(leagueTeam[component][row])")
+                        selectedLeague = "Leisure"
+                        let leisureArray = Array(leisureTeams)
+                        leagueTeam = [leagues,leisureArray.sorted{ $0 < $1} ]
+                        self.teamOnePicker.reloadComponent(1)
+                    }
+                    else if row == 2 {
+                        selectedLeague = "Bronze"
+                        let bronzeArray = Array(bronzeTeams)
+                        leagueTeam = [leagues,bronzeArray.sorted{ $0 < $1} ]
+                        self.teamOnePicker.reloadComponent(1)
+                    }
+                    else if row == 3 {
+                        selectedLeague = "Silver"
+                        let silverArray = Array(silverTeams)
+                        leagueTeam = [leagues,silverArray.sorted{ $0 < $1} ]
+                        self.teamOnePicker.reloadComponent(1)
+                    }
+                    else if row == 4 {
+                        selectedLeague = "Gold"
+                        let goldArray = Array(goldTeams)
+                        leagueTeam = [leagues,goldArray.sorted{ $0 < $1} ]
+                        self.teamOnePicker.reloadComponent(1)
+                    }
+                    else if row == 5 {
+                        selectedLeague = "Platinum"
+                        let platinumArray = Array(platinumTeams)
+                        leagueTeam = [leagues,platinumArray.sorted{ $0 < $1} ]
+                        self.teamOnePicker.reloadComponent(1)
+                    }
+                    else if row == 6 {
+                        selectedLeague = "Diamond"
+                        let diamondArray = Array(diamondTeams)
+                        leagueTeam = [leagues,diamondArray.sorted{ $0 < $1} ]
+                        self.teamOnePicker.reloadComponent(1)
+                    }
+                    print("Selected League: \(leagueTeam[component][row])")
+                case 1:
+                    print("Team selected: \(leagueTeam[component][row])")
+                    player.shared.teamData[pickerView.tag].league = selectedLeague
+                    player.shared.teamData[pickerView.tag].team = leagueTeam[component][row]
+                    defaults.set(selectedLeague, forKey: "savedLeague1")
+                    defaults.set(leagueTeam[component][row], forKey: "savedTeam1")
+                    //player.shared.teamData.append((league:selectedLeague, team: leagueTeam[component][row]))
+                default: break
+                }
         }
-        //print("Selected League: \(leagueTeam[component][row])")
-            //print("Selected League is: \(selectedLeague)")
-        
-        //print("Selected info at row \(leagueTeam[component][row])")
-        
-        //defaults.set(leagues[row], forKey: "savedLeague")
-        //player.shared.league = leagues[row]
+        else if pickerView.tag == 1 {
+            print("Selected Team #2 Data")
+        }
+        else if pickerView.tag == 2 {
+            print("Selected Team #3 Data")
+        }
     }
-    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.teamOnePicker.dataSource = self
         self.teamOnePicker.delegate = self
+        self.teamTwoPicker.dataSource = self
+        self.teamTwoPicker.delegate = self
+        self.teamThreePicker.dataSource = self
+        self.teamThreePicker.delegate = self
+        
+        //print("Number of teams in Bronze is: \(bronzeTeams.count)")
+        
         if let chosenLeague1 = defaults.string(forKey: "savedLeague1") {
             for x in 0..<leagues.count {
                 if leagues[x] == chosenLeague1 {

@@ -78,7 +78,6 @@ class scheduleController: UIViewController {
                         if x == 0 {
                             //print("Formatting the Leisure schedule...")
                             self.formatData(theData: response.value!, theLeague: leisure, debugLeague: "Leisure")
-                            
                         }
                         else if x == 1 {
 //                            print("Formatting the Bronze schedule...")
@@ -235,8 +234,28 @@ class scheduleController: UIViewController {
                 //for x in 0..<theLeague.gameData.count {
                     //print(lCounter)
                     lCounter += 1
-                    leisureTeams.insert(theLeague.gameData[x].gameHomeTeam)
-                    leisureTeams.insert(theLeague.gameData[x].gameAwayTeam)
+//                    leisureTeams.insert(theLeague.gameData[x].gameHomeTeam)
+//                    leisureTeams.insert(theLeague.gameData[x].gameAwayTeam)
+                    
+                    var leisureHomeNameToClean = theLeague.gameData[x].gameHomeTeam.lowercased()
+                    var leisureAwayNameToClean = theLeague.gameData[x].gameAwayTeam.lowercased()
+                    
+                    //print("Pre-Cleaned Bronze home team name: \(homeNameToClean)")
+                    //print("Pre-Cleaned Bronze away team name: \(awayNameToClean)")
+                    
+                    for z in 0..<cleanupTeamItems.count {
+                        //print("removing character: \(cleanupTeamItems[z])")
+                        leisureHomeNameToClean = leisureHomeNameToClean.replacingOccurrences(of: cleanupTeamItems[z], with: "")
+                        leisureAwayNameToClean = leisureAwayNameToClean.replacingOccurrences(of: cleanupTeamItems[z], with: "")
+                    }
+                    
+                    //print("Cleaned Bronze home team name: \(homeNameToClean.capitalized)")
+                    //print("Cleaned Bronze away team name: \(awayNameToClean.capitalized)")
+                    //print("=======================================================")
+                    leisureTeams.insert(leisureHomeNameToClean)
+                    leisureTeams.insert(leisureAwayNameToClean)
+                    
+                    
                     if lCounter == theLeague.gameData.count {
                         leisureTeams = cleanUpSchedule(theLeagueTeams: leisureTeams, debugLeague: "Leisure")
                     }
@@ -248,9 +267,40 @@ class scheduleController: UIViewController {
                 
             case "Bronze":
                 //for x in 0..<theLeague.gameData.count {
+                    ///print("=======================================================")
                     bCounter += 1
-                    bronzeTeams.insert(theLeague.gameData[x].gameHomeTeam)
-                    bronzeTeams.insert(theLeague.gameData[x].gameAwayTeam)
+//                    bronzeTeams.insert(theLeague.gameData[x].gameHomeTeam)
+//                    bronzeTeams.insert(theLeague.gameData[x].gameAwayTeam)
+                    
+                    // Code to test for special characters starts here ....
+                    
+                    var bronzeHomeNameToClean = theLeague.gameData[x].gameHomeTeam.lowercased()
+                    var bronzeAwayNameToClean = theLeague.gameData[x].gameAwayTeam.lowercased()
+                    
+                    //print("Pre-Cleaned Bronze home team name: \(homeNameToClean)")
+                    //print("Pre-Cleaned Bronze away team name: \(awayNameToClean)")
+                    
+                    for z in 0..<cleanupTeamItems.count {
+                        //print("removing character: \(cleanupTeamItems[z])")
+                        bronzeHomeNameToClean = bronzeHomeNameToClean.replacingOccurrences(of: cleanupTeamItems[z], with: "")
+                        bronzeAwayNameToClean = bronzeAwayNameToClean.replacingOccurrences(of: cleanupTeamItems[z], with: "")
+                    }
+                    
+                    //print("Cleaned Bronze home team name: \(homeNameToClean.capitalized)")
+                    //print("Cleaned Bronze away team name: \(awayNameToClean.capitalized)")
+                    //print("=======================================================")
+                    bronzeTeams.insert(bronzeHomeNameToClean)
+                    bronzeTeams.insert(bronzeAwayNameToClean)
+//
+//
+//
+//                    print("Formatted home bronze team: \(theLeague.gameData[x].gameHomeTeam.lowercased())")
+//                    print("Formatted home away team: \(theLeague.gameData[x].gameAwayTeam.lowercased())")
+//
+//
+                    // Code to test for special characters ends here ....
+
+
                 //}
                     if bCounter == theLeague.gameData.count {
                     bronzeTeams = cleanUpSchedule(theLeagueTeams: bronzeTeams, debugLeague: "Bronze")
@@ -262,8 +312,30 @@ class scheduleController: UIViewController {
             case "Silver":
                 //for x in 0..<theLeague.gameData.count {
                     sCounter += 1
-                    silverTeams.insert(theLeague.gameData[x].gameHomeTeam)
-                    silverTeams.insert(theLeague.gameData[x].gameAwayTeam)
+//                    silverTeams.insert(theLeague.gameData[x].gameHomeTeam)
+//                    silverTeams.insert(theLeague.gameData[x].gameAwayTeam)
+                    
+                    var silverHomeNameToClean = theLeague.gameData[x].gameHomeTeam.lowercased()
+                    var silverAwayNameToClean = theLeague.gameData[x].gameAwayTeam.lowercased()
+                    
+                    //print("Pre-Cleaned Bronze home team name: \(homeNameToClean)")
+                    //print("Pre-Cleaned Bronze away team name: \(awayNameToClean)")
+                    
+                    for z in 0..<cleanupTeamItems.count {
+                        //print("removing character: \(cleanupTeamItems[z])")
+                        silverHomeNameToClean = silverHomeNameToClean.replacingOccurrences(of: cleanupTeamItems[z], with: "")
+                        silverAwayNameToClean = silverAwayNameToClean.replacingOccurrences(of: cleanupTeamItems[z], with: "")
+                    }
+                    
+                    //print("Cleaned Bronze home team name: \(homeNameToClean.capitalized)")
+                    //print("Cleaned Bronze away team name: \(awayNameToClean.capitalized)")
+                    //print("=======================================================")
+                    silverTeams.insert(silverHomeNameToClean)
+                    silverTeams.insert(silverAwayNameToClean)
+                    
+                    
+                    
+                    
                // }
                     if sCounter == theLeague.gameData.count {
                     silverTeams = cleanUpSchedule(theLeagueTeams: silverTeams, debugLeague: "Silver")
@@ -273,9 +345,29 @@ class scheduleController: UIViewController {
             case "Gold":
                // for x in 0..<theLeague.gameData.count {
                 gCounter += 1
-                goldTeams.insert(theLeague.gameData[x].gameHomeTeam)
-                    goldTeams.insert(theLeague.gameData[x].gameAwayTeam)
+//                goldTeams.insert(theLeague.gameData[x].gameHomeTeam)
+//                    goldTeams.insert(theLeague.gameData[x].gameAwayTeam)
                 //}
+                
+                var goldHomeNameToClean = theLeague.gameData[x].gameHomeTeam.lowercased()
+                var goldAwayNameToClean = theLeague.gameData[x].gameAwayTeam.lowercased()
+                
+                //print("Pre-Cleaned Bronze home team name: \(homeNameToClean)")
+                //print("Pre-Cleaned Bronze away team name: \(awayNameToClean)")
+                
+                for z in 0..<cleanupTeamItems.count {
+                    //print("removing character: \(cleanupTeamItems[z])")
+                    goldHomeNameToClean = goldHomeNameToClean.replacingOccurrences(of: cleanupTeamItems[z], with: "")
+                    goldAwayNameToClean = goldAwayNameToClean.replacingOccurrences(of: cleanupTeamItems[z], with: "")
+                }
+                
+                //print("Cleaned Bronze home team name: \(homeNameToClean.capitalized)")
+                //print("Cleaned Bronze away team name: \(awayNameToClean.capitalized)")
+                //print("=======================================================")
+                goldTeams.insert(goldHomeNameToClean)
+                goldTeams.insert(goldAwayNameToClean)
+                
+                
                 if gCounter == theLeague.gameData.count {
                     goldTeams = cleanUpSchedule(theLeagueTeams: goldTeams, debugLeague: "Gold")
                 }
@@ -284,8 +376,28 @@ class scheduleController: UIViewController {
             case "Platinum":
                // for x in 0..<theLeague.gameData.count {
                 pCounter += 1
-                platinumTeams.insert(theLeague.gameData[x].gameHomeTeam)
-                    platinumTeams.insert(theLeague.gameData[x].gameAwayTeam)
+//                platinumTeams.insert(theLeague.gameData[x].gameHomeTeam)
+//                    platinumTeams.insert(theLeague.gameData[x].gameAwayTeam)
+                
+                var platinumHomeNameToClean = theLeague.gameData[x].gameHomeTeam.lowercased()
+                var platinumAwayNameToClean = theLeague.gameData[x].gameAwayTeam.lowercased()
+                
+                //print("Pre-Cleaned Bronze home team name: \(homeNameToClean)")
+                //print("Pre-Cleaned Bronze away team name: \(awayNameToClean)")
+                
+                for z in 0..<cleanupTeamItems.count {
+                    //print("removing character: \(cleanupTeamItems[z])")
+                    platinumHomeNameToClean = platinumHomeNameToClean.replacingOccurrences(of: cleanupTeamItems[z], with: "")
+                    platinumAwayNameToClean = platinumAwayNameToClean.replacingOccurrences(of: cleanupTeamItems[z], with: "")
+                }
+                
+                //print("Cleaned Bronze home team name: \(homeNameToClean.capitalized)")
+                //print("Cleaned Bronze away team name: \(awayNameToClean.capitalized)")
+                //print("=======================================================")
+                platinumTeams.insert(platinumHomeNameToClean)
+                platinumTeams.insert(platinumAwayNameToClean)
+                
+                
                 //}
                 if pCounter == theLeague.gameData.count {
                 platinumTeams = cleanUpSchedule(theLeagueTeams: platinumTeams, debugLeague: "Platinum")
@@ -297,8 +409,28 @@ class scheduleController: UIViewController {
                 
                 //for x in 0..<theLeague.gameData.count {
                 dCounter += 1
-                diamondTeams.insert(theLeague.gameData[x].gameHomeTeam)
-                    diamondTeams.insert(theLeague.gameData[x].gameAwayTeam)
+//                diamondTeams.insert(theLeague.gameData[x].gameHomeTeam)
+//                    diamondTeams.insert(theLeague.gameData[x].gameAwayTeam)
+                
+                var diamondHomeNameToClean = theLeague.gameData[x].gameHomeTeam.lowercased()
+                var diamondAwayNameToClean = theLeague.gameData[x].gameAwayTeam.lowercased()
+                
+                //print("Pre-Cleaned Bronze home team name: \(homeNameToClean)")
+                //print("Pre-Cleaned Bronze away team name: \(awayNameToClean)")
+                
+                for z in 0..<cleanupTeamItems.count {
+                    //print("removing character: \(cleanupTeamItems[z])")
+                    diamondHomeNameToClean = diamondHomeNameToClean.replacingOccurrences(of: cleanupTeamItems[z], with: "")
+                    diamondAwayNameToClean = diamondAwayNameToClean.replacingOccurrences(of: cleanupTeamItems[z], with: "")
+                }
+                
+                //print("Cleaned Bronze home team name: \(homeNameToClean.capitalized)")
+                //print("Cleaned Bronze away team name: \(awayNameToClean.capitalized)")
+                //print("=======================================================")
+                diamondTeams.insert(diamondHomeNameToClean)
+                diamondTeams.insert(diamondAwayNameToClean)
+                
+                
                 if dCounter == theLeague.gameData.count {
                     diamondTeams = cleanUpSchedule(theLeagueTeams: diamondTeams, debugLeague: "Diamond")
                     let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
@@ -334,7 +466,7 @@ class scheduleController: UIViewController {
         for x in 0..<leagueSchedule.gameData.count {
             if leagueSchedule.gameData[x].gameHomeTeam.contains(playerTeam) || leagueSchedule.gameData[x].gameAwayTeam.contains(playerTeam) {
                 playerGames.gameData.append(leagueSchedule.gameData[x])
-                 print("On \(leagueSchedule.gameData[x].gameDate) at \(leagueSchedule.gameData[x].gameTime) on the \(leagueSchedule.gameData[x].gameRink) rink \(leagueSchedule.gameData[x].gameHomeTeam) is playing against \(leagueSchedule.gameData[x].gameAwayTeam)")
+                 print("On \(leagueSchedule.gameData[x].gameDayOfWeek) \(leagueSchedule.gameData[x].gameDate) at \(leagueSchedule.gameData[x].gameTime) on the \(leagueSchedule.gameData[x].gameRink) rink \(leagueSchedule.gameData[x].gameHomeTeam) is playing against \(leagueSchedule.gameData[x].gameAwayTeam)")
             }
             else if leagueSchedule.gameData[x].gameHomeTeam.contains(PLAYOFFString) || leagueSchedule.gameData[x].gameHomeTeam.contains(SEMI_FINALString) || leagueSchedule.gameData[x].gameHomeTeam.contains(FINALString) {
                playerGames.gameData.append(leagueSchedule.gameData[x])
