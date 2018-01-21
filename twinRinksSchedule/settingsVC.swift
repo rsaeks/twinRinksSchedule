@@ -67,37 +67,43 @@ class settingsController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                     else if row == 1 {
                         //print("Selected League: \(leagueTeam[component][row])")
                         selectedLeague = "Leisure"
-                        let leisureArray = Array(leisureTeams)
+                        var leisureArray = Array(leisureTeams)
+                        for x in 0..<leisureArray.count { leisureArray[x] = leisureArray[x].capitalized }
                         leagueTeam = [leagues,leisureArray.sorted{ $0 < $1} ]
                         self.teamOnePicker.reloadComponent(1)
                     }
                     else if row == 2 {
                         selectedLeague = "Bronze"
-                        let bronzeArray = Array(bronzeTeams)
+                        var bronzeArray = Array(bronzeTeams)
+                        for x in 0..<bronzeArray.count { bronzeArray[x] = bronzeArray[x].capitalized }
                         leagueTeam = [leagues,bronzeArray.sorted{ $0 < $1} ]
                         self.teamOnePicker.reloadComponent(1)
                     }
                     else if row == 3 {
                         selectedLeague = "Silver"
-                        let silverArray = Array(silverTeams)
+                        var silverArray = Array(silverTeams)
+                        for x in 0..<silverArray.count { silverArray[x] = silverArray[x].capitalized }
                         leagueTeam = [leagues,silverArray.sorted{ $0 < $1} ]
                         self.teamOnePicker.reloadComponent(1)
                     }
                     else if row == 4 {
                         selectedLeague = "Gold"
-                        let goldArray = Array(goldTeams)
+                        var goldArray = Array(goldTeams)
+                        for x in 0 ..< goldArray.count { goldArray[x] = goldArray[x].capitalized }
                         leagueTeam = [leagues,goldArray.sorted{ $0 < $1} ]
                         self.teamOnePicker.reloadComponent(1)
                     }
                     else if row == 5 {
                         selectedLeague = "Platinum"
-                        let platinumArray = Array(platinumTeams)
+                        var platinumArray = Array(platinumTeams)
+                        for x in 0..<platinumArray.count { platinumArray[x] = platinumArray[x].capitalized }
                         leagueTeam = [leagues,platinumArray.sorted{ $0 < $1} ]
                         self.teamOnePicker.reloadComponent(1)
                     }
                     else if row == 6 {
                         selectedLeague = "Diamond"
-                        let diamondArray = Array(diamondTeams)
+                        var diamondArray = Array(diamondTeams)
+                        for x in 0..<diamondArray.count { diamondArray[x] = diamondArray[x].capitalized }
                         leagueTeam = [leagues,diamondArray.sorted{ $0 < $1} ]
                         self.teamOnePicker.reloadComponent(1)
                     }

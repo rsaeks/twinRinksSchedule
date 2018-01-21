@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		505AC844CBD23971E7DAC64C /* Pods_twinRinksSchedule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A0AB45E659917B722797C07 /* Pods_twinRinksSchedule.framework */; };
+		D57013BE200C5AC700996184 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57013BD200C5AC700996184 /* ScheduleTableViewCell.swift */; };
 		D5CC9CC81FBA75DD00FA554C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC9CC71FBA75DD00FA554C /* AppDelegate.swift */; };
 		D5CC9CCA1FBA75DD00FA554C /* scheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC9CC91FBA75DD00FA554C /* scheduleVC.swift */; };
 		D5CC9CCC1FBA75DD00FA554C /* checkinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CC9CCB1FBA75DD00FA554C /* checkinVC.swift */; };
@@ -23,6 +24,7 @@
 		2A0AB45E659917B722797C07 /* Pods_twinRinksSchedule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_twinRinksSchedule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		677580EC3FC45D497C3F48F9 /* Pods-twinRinksSchedule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twinRinksSchedule.debug.xcconfig"; path = "Pods/Target Support Files/Pods-twinRinksSchedule/Pods-twinRinksSchedule.debug.xcconfig"; sourceTree = "<group>"; };
 		CAF0A6588DF48B53D06E2573 /* Pods-twinRinksSchedule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twinRinksSchedule.release.xcconfig"; path = "Pods/Target Support Files/Pods-twinRinksSchedule/Pods-twinRinksSchedule.release.xcconfig"; sourceTree = "<group>"; };
+		D57013BD200C5AC700996184 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		D5CC9CC41FBA75DD00FA554C /* twinRinksSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twinRinksSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5CC9CC71FBA75DD00FA554C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5CC9CC91FBA75DD00FA554C /* scheduleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = scheduleVC.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				D5CC9CD51FBA75DD00FA554C /* Info.plist */,
 				D5CC9CDD1FBA7A6100FA554C /* constants.swift */,
 				D5CC9CDF1FBA92EB00FA554C /* definitions.swift */,
+				D57013BD200C5AC700996184 /* ScheduleTableViewCell.swift */,
 			);
 			path = twinRinksSchedule;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5CC9CCC1FBA75DD00FA554C /* checkinVC.swift in Sources */,
+				D57013BE200C5AC700996184 /* ScheduleTableViewCell.swift in Sources */,
 				D5CC9CDC1FBA78DD00FA554C /* settingsVC.swift in Sources */,
 				D5CC9CE01FBA92EB00FA554C /* definitions.swift in Sources */,
 				D5CC9CC81FBA75DD00FA554C /* AppDelegate.swift in Sources */,
