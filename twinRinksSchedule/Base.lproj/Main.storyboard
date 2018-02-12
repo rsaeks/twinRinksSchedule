@@ -54,7 +54,7 @@
                                     <constraint firstAttribute="height" constant="400" id="PM5-XR-gna"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="9NZ-XC-sHs" customClass="ScheduleTableViewCell" customModule="twinRinksSchedule" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="gameCell" rowHeight="60" id="9NZ-XC-sHs" customClass="ScheduleTableViewCell" customModule="twinRinksSchedule" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9NZ-XC-sHs" id="Sku-rd-iYM">
@@ -121,7 +121,6 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.0" green="0.50143923347441888" blue="1" alpha="0.45670114436619719" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="687-ch-KMP" firstAttribute="centerY" secondItem="Sku-rd-iYM" secondAttribute="centerY" id="35B-W4-gYb"/>
                                                 <constraint firstItem="XaW-dS-Fcz" firstAttribute="leading" secondItem="8jk-Js-xeN" secondAttribute="trailing" constant="20" id="L6b-Sg-zZZ"/>
@@ -164,6 +163,7 @@
                     <connections>
                         <outlet property="giantLabel" destination="Y2Y-UJ-Bl8" id="eoJ-PJ-YqQ"/>
                         <outlet property="playerLeagueLabel" destination="his-xD-Tfx" id="tC6-Fp-F6l"/>
+                        <outlet property="scheduleTableView" destination="Pru-xo-vgz" id="gBx-Ld-mzi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>

@@ -17,17 +17,25 @@ class ScheduleTableViewCell: UITableViewCell {
     @IBOutlet weak var TableViewCellTime: UILabel!
     @IBOutlet weak var TableViewCellAgainst: UILabel!
     
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func updateViews(leagueImage: String, homeTeam: String, date: String, dayOfWeek: String, time: String, awayTeam: String, rink: String) {
+        
+        TableViewCellDate.text = date
+        TableViewCellDayOfWeek.text = dayOfWeek
+        TableViewCellTime.text = time
+        TableViewCellLeagueImage.image = UIImage(named: "\(leagueImage).png")
+        
+        print("Player Team: \(player.shared.teamData[0].team)")
+        print("Home Team: \(homeTeam)")
+        print("Away Team: \(awayTeam)")
+        
+        if homeTeam == player.shared.teamData[0].team {
+            TableViewCellHomeOrAwayImage.image = #imageLiteral(resourceName: "home")
+            TableViewCellAgainst.text = awayTeam
+        }
+        if awayTeam == player.shared.teamData[0].team {
+            TableViewCellHomeOrAwayImage.image = #imageLiteral(resourceName: "away")
+            TableViewCellAgainst.text = homeTeam
+        }
     }
 
 }

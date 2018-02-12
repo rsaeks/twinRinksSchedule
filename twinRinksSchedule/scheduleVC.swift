@@ -34,12 +34,17 @@ var leisureHTML = "", bronzeHTML = "", silverHTML = "", goldHTML = "", platinumH
 
 
 
-class scheduleController: UIViewController {
+class scheduleController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     @IBOutlet weak var playerLeagueLabel: UILabel!
-    @IBOutlet weak var giantLabel: UILabel!    
+    @IBOutlet weak var giantLabel: UILabel!
+    @IBOutlet weak var scheduleTableView: UITableView!
+    
     override func viewDidLoad() {
-        print("View did load")
+//        print("View did load")
         super.viewDidLoad()
+        scheduleTableView.dataSource = self
+        scheduleTableView.delegate = self
         //print("\(player.shared.league)")
         if let savedLeague1 = defaults.string(forKey: "savedLeague1") {
             player.shared.teamData[0].league = savedLeague1
@@ -66,11 +71,11 @@ class scheduleController: UIViewController {
 }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("View did appear")
-        //print("\(player.shared.league)")
+//        print("View did appear")
+        print("\(player.shared.league)")
         if let savedLeague1 = defaults.string(forKey: "savedLeague1") { player.shared.teamData[0].league = savedLeague1 }
         if let savedTeam1 = defaults.string(forKey: "savedTeam1") { player.shared.teamData[0].team = savedTeam1 }
-        print(player.shared.teamData)
+        print("Saved data is: \(player.shared.teamData)")
         self.preparePlayerTeams()
     }
     
@@ -158,12 +163,12 @@ class scheduleController: UIViewController {
                 
                 
                 if lCounter == theLeague.gameData.count {
-                    print("Leisure teams before cleanup: \(leisureTeams)")
+//                    print("Leisure teams before cleanup: \(leisureTeams)")
                     let filteredTeams = leisureTeams.filter({ teamName -> Bool in
                         cleanupTeamItems.contains(where: { teamName.contains($0) }) == false
                     })
                     leisureTeams = cleanUpSchedule(theLeagueTeams: filteredTeams, debugLeague: "Leisure")
-                    print("Leisure teams after cleanup: \(leisureTeams)")
+//                    print("Leisure teams after cleanup: \(leisureTeams)")
                 }
 
             case "Bronze":
@@ -181,12 +186,12 @@ class scheduleController: UIViewController {
 //                }
                 
                 if bCounter == theLeague.gameData.count {
-                    print("Bronze teams before cleanup: \(bronzeTeams)")
+//                    print("Bronze teams before cleanup: \(bronzeTeams)")
                     let filteredTeams = bronzeTeams.filter({ teamName -> Bool in
                         cleanupTeamItems.contains(where: { teamName.contains($0) }) == false
                     })
                     bronzeTeams = cleanUpSchedule(theLeagueTeams: filteredTeams, debugLeague: "Bronze")
-                    print("Bronze teams after cleanup: \(bronzeTeams)")
+//                    print("Bronze teams after cleanup: \(bronzeTeams)")
                 }
                 
             case "Silver":
@@ -205,12 +210,12 @@ class scheduleController: UIViewController {
 //                }
 //
                 if sCounter == theLeague.gameData.count {
-                    print("Silver teams before cleanup: \(silverTeams)")
+//                    print("Silver teams before cleanup: \(silverTeams)")
                     let filteredTeams = silverTeams.filter({ teamName -> Bool in
                         cleanupTeamItems.contains(where: { teamName.contains($0) }) == false
                     })
                     silverTeams = cleanUpSchedule(theLeagueTeams: filteredTeams, debugLeague: "Silver")
-                    print("Silver teams after cleanup: \(silverTeams)")
+//                    print("Silver teams after cleanup: \(silverTeams)")
                 }
             
             case "Gold":
@@ -229,12 +234,12 @@ class scheduleController: UIViewController {
 //                }
                 
                 if gCounter == theLeague.gameData.count {
-                    print("Gold teams before cleanup: \(goldTeams)")
+//                    print("Gold teams before cleanup: \(goldTeams)")
                     let filteredTeams = goldTeams.filter({ teamName -> Bool in
                         cleanupTeamItems.contains(where: { teamName.contains($0) }) == false
                     })
                     goldTeams = cleanUpSchedule(theLeagueTeams: filteredTeams, debugLeague: "Gold")
-                    print("Gold teams after cleanup: \(goldTeams)")
+//                    print("Gold teams after cleanup: \(goldTeams)")
                 }
                 
             case "Platinum":
@@ -253,12 +258,12 @@ class scheduleController: UIViewController {
 //                }
              
                 if pCounter == theLeague.gameData.count {
-                    print("Platinum teams before cleanup: \(platinumTeams)")
+//                    print("Platinum teams before cleanup: \(platinumTeams)")
                     let filteredTeams = platinumTeams.filter({ teamName -> Bool in
                         cleanupTeamItems.contains(where: { teamName.contains($0) }) == false
                     })
                     platinumTeams = cleanUpSchedule(theLeagueTeams: filteredTeams, debugLeague: "Platinum")
-                    print("Platinum teams after cleanup: \(platinumTeams)")
+//                    print("Platinum teams after cleanup: \(platinumTeams)")
                 }
                 
             case "Diamond":
@@ -278,12 +283,12 @@ class scheduleController: UIViewController {
 //                }
                 
                 if dCounter == theLeague.gameData.count {
-                    print("Diamond teams before cleanup: \(diamondTeams)")
+//                    print("Diamond teams before cleanup: \(diamondTeams)")
                     let filteredTeams = diamondTeams.filter({ teamName -> Bool in
                         cleanupTeamItems.contains(where: { teamName.contains($0) }) == false
                     })
                     diamondTeams = cleanUpSchedule(theLeagueTeams: filteredTeams, debugLeague: "Diamond")
-                    print("Diamond teams after cleanup: \(diamondTeams)")
+//                    print("Diamond teams after cleanup: \(diamondTeams)")
                     let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
                     DispatchQueue.main.asyncAfter(deadline: when) { self.preparePlayerTeams() }
                 }
@@ -329,6 +334,41 @@ class scheduleController: UIViewController {
         }
         
         giantLabel.text = allGamesLabel
+        self.scheduleTableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("TableView - number of runs in section is: \(playerGames.gameData.count)")
+        return playerGames.gameData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "gameCell") as? ScheduleTableViewCell {
+           cell.updateViews(leagueImage: playerGames.gameData[indexPath.row].gameLeague,
+                            homeTeam: playerGames.gameData[indexPath.row].gameHomeTeam,
+                            date: playerGames.gameData[indexPath.row].gameDate,
+                            dayOfWeek: playerGames.gameData[indexPath.row].gameDayOfWeek,
+                            time: playerGames.gameData[indexPath.row].gameTime,
+                            awayTeam: playerGames.gameData[indexPath.row].gameAwayTeam,
+                            rink: playerGames.gameData[indexPath.row].gameRink)
+//            print("Updating table view cell at position: \(indexPath.row)")
+//            print("Data is as follows:")
+//            print("League : \(playerGames.gameData[indexPath.row].gameLeague)")
+//            print("Home Team: \(playerGames.gameData[indexPath.row].gameHomeTeam)")
+//            print("date: \(playerGames.gameData[indexPath.row].gameDate)")
+//            print("day of week: \(playerGames.gameData[indexPath.row].gameDayOfWeek)")
+//            print("time: \(playerGames.gameData[indexPath.row].gameTime)")
+//            print("away team: \(playerGames.gameData[indexPath.row].gameAwayTeam)")
+//            print("rink: \(playerGames.gameData[indexPath.row].gameRink)")
+            if playerGames.gameData[indexPath.row].gameRink == "Blue" {
+                cell.backgroundColor = BlueRink
+            }
+            else if playerGames.gameData[indexPath.row].gameRink == "Red"{
+                cell.backgroundColor = RedRink
+            }
+            else { cell.backgroundColor = White }
+            return cell
+        }
+        else { return ScheduleTableViewCell() }
     }
 }
-

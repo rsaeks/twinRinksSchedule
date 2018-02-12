@@ -25,6 +25,12 @@ let FINALString = "Final"
 //Items to remove from schedule
 let cleanup = ["", "PLAYOFF", "SEMI FINAL", "FINAL","HOCKEY APPRECIATION DAY", "Hockey Appreciation Day", "Hockey appreciation Day", "Hockey appreciation day", "FREE RAT HOCKEY", "Free Rat Hockey", "Last Day for $46 Discount","Last day for $46 discount","Last Day for $46 discount","Early Captains meet for the draft","early captains meet for the draft","Early captains meet for the draft","Early teams meet for the draft","All Captains meet for the draft","all captains meet for the draft","All captains meet for the draft","All teams meet for the draft", "last day for $ discount", "free rat hockey", "hockey appreciation day", "final", "playoff", "semi final", "Final", "Playoff" ]
 
+// Rink Colors
+
+let BlueRink = UIColor(red: 84/255, green: 137/255, blue: 234/255, alpha: 0.75)
+let RedRink = UIColor(red: 201/255, green: 106/255, blue: 106/255, alpha: 0.75)
+
+
 // Setup Team Colors
 let Black = UIColor.black
 let Blue = UIColor.init(red: 0, green: 135, blue: 197, alpha: 1)
