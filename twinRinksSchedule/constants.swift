@@ -32,20 +32,20 @@ let RedRink = UIColor(red: 201/255, green: 106/255, blue: 106/255, alpha: 0.75)
 
 
 // Setup Team Colors
-let Black = UIColor.black
-let Blue = UIColor.init(red: 0, green: 135, blue: 197, alpha: 1)
-let Brass = UIColor.init(red: 71, green: 65, blue: 26, alpha: 1)
-let Brown = UIColor.brown
-let Copper = UIColor.init(red: 196, green: 126, blue: 90, alpha: 1)
-let Gold = UIColor.init(red: 255, green: 216, blue: 88, alpha: 1)
-let Grey = UIColor.gray
-let Kelly = UIColor.green
-let Lime = UIColor.init(red: 186, green: 223, blue: 48, alpha: 1)
-let Orange = UIColor.orange
-let Purple = UIColor.purple
-let Red = UIColor.red
-let Royal = UIColor.init(red: 0, green: 35, blue: 156, alpha: 1)
-let Tan = UIColor.init(red: 209, green: 178, blue: 144, alpha: 1)
-let Teal = UIColor.init(red: 0, green: 126, blue: 126, alpha: 1)
-let White = UIColor.white
-let Yellow = UIColor.yellow
+let Black = UIColor.black.cgColor
+let Blue = UIColor.init(red: 0/255, green: 135/255, blue: 197/255, alpha: 1.0).cgColor
+let Brass = UIColor(red: 188/255, green: 181/255, blue: 49/255, alpha: 1.0).cgColor
+let Brown = UIColor(red: 84/255, green: 46/255, blue: 0/255, alpha: 1.0).cgColor
+let Copper = UIColor.init(red: 196/255, green: 126/255, blue: 90/255, alpha: 1.0).cgColor
+let Gold = UIColor.init(red: 255/255, green: 216/255, blue: 88/255, alpha: 1.0).cgColor
+let Grey = UIColor.gray.cgColor
+let Kelly = UIColor(red: 0/255, green: 96/255, blue: 25/255, alpha: 1.0).cgColor
+let Lime = UIColor.init(red: 186/255, green: 223/255, blue: 48/255, alpha: 1).cgColor
+let Orange = UIColor(red: 239/255, green: 131/255, blue: 0/255, alpha: 1.0).cgColor
+let Purple = UIColor(red: 108/255, green: 0/255, blue: 191/255, alpha: 1.0).cgColor
+let Red = UIColor(red: 206/255, green: 0/255, blue: 0/255, alpha: 1.0).cgColor
+let Royal = UIColor.init(red: 0/255, green: 35/255, blue: 156/255, alpha: 1).cgColor
+let Tan = UIColor.init(red: 209/255, green: 178/255, blue: 144/255, alpha: 1).cgColor
+let Teal = UIColor.init(red: 0/255, green: 126/255, blue: 126/255, alpha: 1).cgColor
+let White = UIColor.white.cgColor
+let Yellow = UIColor(red: 255/255, green: 255/255, blue: 112/255, alpha: 1.0).cgColor

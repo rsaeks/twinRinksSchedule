@@ -24,18 +24,19 @@ class ScheduleTableViewCell: UITableViewCell {
         TableViewCellTime.text = time
         TableViewCellLeagueImage.image = UIImage(named: "\(leagueImage).png")
         
-        print("Player Team: \(player.shared.teamData[0].team)")
-        print("Home Team: \(homeTeam)")
-        print("Away Team: \(awayTeam)")
+//        print("Player Team: \(player.shared.teamData[0].team)")
+//        print("Home Team: \(homeTeam)")
+//        print("Away Team: \(awayTeam)")
         
         if homeTeam == player.shared.teamData[0].team {
             TableViewCellHomeOrAwayImage.image = #imageLiteral(resourceName: "home")
             TableViewCellAgainst.text = awayTeam
         }
-        if awayTeam == player.shared.teamData[0].team {
+        else if awayTeam == player.shared.teamData[0].team {
             TableViewCellHomeOrAwayImage.image = #imageLiteral(resourceName: "away")
             TableViewCellAgainst.text = homeTeam
         }
+        else { TableViewCellAgainst.text = homeTeam }
     }
 
 }

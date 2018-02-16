@@ -32,7 +32,7 @@ var skater = profile()
 var leisure = schedule(), bronze = schedule(),  silver = schedule(), gold = schedule(), platinum = schedule(), diamond = schedule()
 var leisureHTML = "", bronzeHTML = "", silverHTML = "", goldHTML = "", platinumHTML = "", diamondHTML = ""
 
-
+var myTeamColor: CGColor = White
 
 class scheduleController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -51,6 +51,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         }
         if let savedTeam1 = defaults.string(forKey: "savedTeam1") {
             player.shared.teamData[0].team = savedTeam1
+           // Set our cell background colors
         }
         for x in 0..<numberOfLeagues {
             Alamofire.request(leagueScheduleURLs[x], method: .get)
@@ -75,6 +76,26 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         print("\(player.shared.league)")
         if let savedLeague1 = defaults.string(forKey: "savedLeague1") { player.shared.teamData[0].league = savedLeague1 }
         if let savedTeam1 = defaults.string(forKey: "savedTeam1") { player.shared.teamData[0].team = savedTeam1 }
+        switch player.shared.teamData[0].team    {
+        case "Black": myTeamColor = Black
+        case "Blue": myTeamColor = Blue
+        case "Brass": myTeamColor = Brass
+        case "Brown": myTeamColor = Brown
+        case "Copper": myTeamColor = Copper
+        case "Gold": myTeamColor = Gold
+        case "Grey": myTeamColor = Grey
+        case "Kelly": myTeamColor = Kelly
+        case "Lime": myTeamColor = Lime
+        case "Orange": myTeamColor = Orange
+        case "Purple": myTeamColor = Purple
+        case "Red": myTeamColor = Red
+        case "Royal": myTeamColor = Royal
+        case "Tan": myTeamColor = Tan
+        case "Teal": myTeamColor = Teal
+        case "White": myTeamColor = White
+        case "Yellow": myTeamColor = Yellow
+        default: myTeamColor = White
+        }
         print("Saved data is: \(player.shared.teamData)")
         self.preparePlayerTeams()
     }
@@ -323,6 +344,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
             }
             else if leagueSchedule.gameData[x].gameHomeTeam.contains(PLAYOFFString) || leagueSchedule.gameData[x].gameHomeTeam.contains(SEMI_FINALString) || leagueSchedule.gameData[x].gameHomeTeam.contains(FINALString) {
                playerGames.gameData.append(leagueSchedule.gameData[x])
+                 print("On \(leagueSchedule.gameData[x].gameDayOfWeek) \(leagueSchedule.gameData[x].gameDate) at \(leagueSchedule.gameData[x].gameTime) on the \(leagueSchedule.gameData[x].gameRink) rink \(leagueSchedule.gameData[x].gameHomeTeam) is playing against \(leagueSchedule.gameData[x].gameAwayTeam)")
             }
         }
         print("Total number of games found for the player: \(playerGames.gameData.count)")
@@ -362,11 +384,14 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
 //            print("rink: \(playerGames.gameData[indexPath.row].gameRink)")
             if playerGames.gameData[indexPath.row].gameRink == "Blue" {
                 cell.backgroundColor = BlueRink
+                cell.layer.borderWidth = 4
+                cell.layer.borderColor = myTeamColor
             }
             else if playerGames.gameData[indexPath.row].gameRink == "Red"{
                 cell.backgroundColor = RedRink
+                cell.layer.borderWidth = 4
+                cell.layer.borderColor = myTeamColor
             }
-            else { cell.backgroundColor = White }
             return cell
         }
         else { return ScheduleTableViewCell() }
