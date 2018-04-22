@@ -27,12 +27,19 @@ var allGames = games(), myGames = games()
 var leagueGames = schedule(), playerGames = schedule()
 var tempArray = [String]()
 var skater = profile()
+var sampleDates = [String]()
 
 // League Data begins here
 var leisure = schedule(), bronze = schedule(),  silver = schedule(), gold = schedule(), platinum = schedule(), diamond = schedule()
 var leisureHTML = "", bronzeHTML = "", silverHTML = "", goldHTML = "", platinumHTML = "", diamondHTML = ""
 
+// Setup our Date formatter
+let rinkDateFormat = DateFormatter()
+
+// Debug varibles
 var myTeamColor: CGColor = White
+
+var showPastGames = true
 
 class scheduleController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -53,6 +60,16 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
             player.shared.teamData[0].team = savedTeam1
            // Set our cell background colors
         }
+        if let savedShowStatus = defaults.string(forKey: "savedShowPastGames") {
+            print("Saved show past games is: \(savedShowStatus)")
+            if savedShowStatus == "0" {
+                showPastGames = false
+            }
+            else {
+                showPastGames = true
+            }
+        }
+        
         for x in 0..<numberOfLeagues {
             Alamofire.request(leagueScheduleURLs[x], method: .get)
                 .validate(statusCode: 200..<300)
@@ -99,8 +116,9 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         print("Saved data is: \(player.shared.teamData)")
         self.preparePlayerTeams()
     }
-    
+
     func preparePlayerTeams() {
+        
         print("Number of items in player array: \(player.shared.teamData.count)")
         for x in 0..<player.shared.teamData.count {
             self.playerLeagueLabel.text = player.shared.teamData[x].league + " " + player.shared.teamData[x].team
@@ -324,7 +342,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func cleanUpSchedule(theLeagueTeams: Set<String>, debugLeague: String) -> Set<String> {
-        print("Cleaning up schedule for \(debugLeague)")
+        //print("Cleaning up schedule for \(debugLeague)")
         var teamsToClean = theLeagueTeams
         for x in 0..<cleanup.count {
             teamsToClean.remove(cleanup[x])
@@ -339,12 +357,44 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         print("Total games to process: \(leagueSchedule.gameData.count)")
         for x in 0..<leagueSchedule.gameData.count {
             if leagueSchedule.gameData[x].gameHomeTeam.contains(playerTeam) || leagueSchedule.gameData[x].gameAwayTeam.contains(playerTeam) {
-                playerGames.gameData.append(leagueSchedule.gameData[x])
-                 print("On \(leagueSchedule.gameData[x].gameDayOfWeek) \(leagueSchedule.gameData[x].gameDate) at \(leagueSchedule.gameData[x].gameTime) on the \(leagueSchedule.gameData[x].gameRink) rink \(leagueSchedule.gameData[x].gameHomeTeam) is playing against \(leagueSchedule.gameData[x].gameAwayTeam)")
+                // Working on Date formatting
+                // Store in SampleDates array
+                
+                rinkDateFormat.dateFormat = "M/d/yyyy"
+                let d1 = rinkDateFormat.date(from: leagueSchedule.gameData[x].gameDate)
+                let d2 = Date()
+                let s2 = rinkDateFormat.string(from: d2)
+                if d1! > d2 {
+                    print("Game date is in the future ... we should show")
+                    playerGames.gameData.append(leagueSchedule.gameData[x])
+                    sampleDates.append(leagueSchedule.gameData[x].gameDate)
+                    print("On \(leagueSchedule.gameData[x].gameDayOfWeek) \(leagueSchedule.gameData[x].gameDate) at \(leagueSchedule.gameData[x].gameTime) on the \(leagueSchedule.gameData[x].gameRink) rink \(leagueSchedule.gameData[x].gameHomeTeam) is playing against \(leagueSchedule.gameData[x].gameAwayTeam)")
+                }
+                else {
+                    print("Game date is in the past ... we should hide")
+                    if showPastGames { playerGames.gameData.append(leagueSchedule.gameData[x]) }
+                }
+                
+                
+
             }
             else if leagueSchedule.gameData[x].gameHomeTeam.contains(PLAYOFFString) || leagueSchedule.gameData[x].gameHomeTeam.contains(SEMI_FINALString) || leagueSchedule.gameData[x].gameHomeTeam.contains(FINALString) {
-               playerGames.gameData.append(leagueSchedule.gameData[x])
-                 print("On \(leagueSchedule.gameData[x].gameDayOfWeek) \(leagueSchedule.gameData[x].gameDate) at \(leagueSchedule.gameData[x].gameTime) on the \(leagueSchedule.gameData[x].gameRink) rink \(leagueSchedule.gameData[x].gameHomeTeam) is playing against \(leagueSchedule.gameData[x].gameAwayTeam)")
+                // Working on Date formatting
+                // Store in SampleDates array
+                rinkDateFormat.dateFormat = "M/d/yyyy"
+                let d1 = rinkDateFormat.date(from: leagueSchedule.gameData[x].gameDate)
+                let d2 = Date()
+                let s2 = rinkDateFormat.string(from: d2)
+                if d1! > d2 {
+                    print("Playoff date is in the future ... we should show")
+                    playerGames.gameData.append(leagueSchedule.gameData[x])
+                    sampleDates.append(leagueSchedule.gameData[x].gameDate)
+                    print("On \(leagueSchedule.gameData[x].gameDayOfWeek) \(leagueSchedule.gameData[x].gameDate) at \(leagueSchedule.gameData[x].gameTime) on the \(leagueSchedule.gameData[x].gameRink) rink \(leagueSchedule.gameData[x].gameHomeTeam) is playing against \(leagueSchedule.gameData[x].gameAwayTeam)")
+                }
+                else {
+                    print("Playoff date is in the past ... we should hide")
+                    if showPastGames { playerGames.gameData.append(leagueSchedule.gameData[x]) }
+                }
             }
         }
         print("Total number of games found for the player: \(playerGames.gameData.count)")
@@ -357,6 +407,18 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         
         giantLabel.text = allGamesLabel
         self.scheduleTableView.reloadData()
+        
+        // Setup our date format here
+//        rinkDateFormat.dateFormat = "M/d/yyyy"
+//        let d2 = Date()
+//        let s2 = rinkDateFormat.string(from: d2)
+//        for d in 0..<sampleDates.count {
+//            let d1 = rinkDateFormat.date(from:sampleDates[d])
+//            if d1! > d2 {
+//            }
+//            else {
+//            }
+//        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

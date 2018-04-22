@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14092" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14111" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14081.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -194,20 +194,38 @@
                                     </textField>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="KHj-bQ-HEe" userLabel="Show Past Games">
+                                <rect key="frame" x="20" y="60" width="335" height="31"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Past Games" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flo-Oi-G8Z">
+                                        <rect key="frame" x="0.0" y="0.0" width="138" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="daa-GG-t75">
+                                        <rect key="frame" x="286" y="0.0" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="toggledPastGames:" destination="adh-NJ-Kd0" eventType="valueChanged" id="2gE-bh-7Cg"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                                <viewLayoutGuide key="safeArea" id="G3K-3A-5mU"/>
+                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="n0S-g5-tjX" userLabel="teamOneSV">
-                                <rect key="frame" x="0.0" y="100" width="375" height="120.5"/>
+                                <rect key="frame" x="0.0" y="131" width="375" height="120.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="NN1-zg-9mR">
-                                        <rect key="frame" x="20" y="0.0" width="335" height="20.5"/>
+                                        <rect key="frame" x="119.5" y="0.0" width="136" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="League 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYj-1j-ea9">
-                                                <rect key="frame" x="0.0" y="0.0" width="167.5" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="68" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8yB-cV-kSb">
-                                                <rect key="frame" x="167.5" y="0.0" width="167.5" height="20.5"/>
+                                                <rect key="frame" x="68" y="0.0" width="68" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -221,10 +239,6 @@
                                         </constraints>
                                     </pickerView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="NN1-zg-9mR" firstAttribute="leading" secondItem="n0S-g5-tjX" secondAttribute="leading" constant="20" id="gId-J6-bsN"/>
-                                    <constraint firstAttribute="trailing" secondItem="NN1-zg-9mR" secondAttribute="trailing" constant="20" id="vss-b8-GoR"/>
-                                </constraints>
                             </stackView>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DJ9-WS-TQV" userLabel="teamTwoSV">
                                 <rect key="frame" x="0.0" y="240.5" width="375" height="120.5"/>
@@ -292,34 +306,46 @@
                                 <rect key="frame" x="0.0" y="484" width="375" height="134"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.90021422402865059" blue="0.95490152781924242" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.8730237614079781" green="0.8730237614079781" blue="0.8730237614079781" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="psd-2N-gLR" firstAttribute="top" secondItem="53r-xX-VYt" secondAttribute="bottom" constant="10" id="0Xg-H1-hRg"/>
                             <constraint firstItem="4Ds-77-KJ2" firstAttribute="top" secondItem="DJ9-WS-TQV" secondAttribute="bottom" constant="20" id="1BF-Eb-w9s"/>
                             <constraint firstItem="4Ds-77-KJ2" firstAttribute="trailing" secondItem="LzG-K2-LU8" secondAttribute="trailing" id="3br-hA-S2G"/>
                             <constraint firstItem="Yn1-Fd-xGA" firstAttribute="trailing" secondItem="LzG-K2-LU8" secondAttribute="trailing" id="4yR-DV-rQG"/>
+                            <constraint firstItem="KHj-bQ-HEe" firstAttribute="top" secondItem="psd-2N-gLR" secondAttribute="bottom" constant="5" id="5jA-gm-ayN"/>
                             <constraint firstItem="psd-2N-gLR" firstAttribute="leading" secondItem="LzG-K2-LU8" secondAttribute="leading" constant="20" id="GN2-bW-4bu"/>
                             <constraint firstItem="53r-xX-VYt" firstAttribute="top" secondItem="LzG-K2-LU8" secondAttribute="top" constant="10" id="JeT-Mh-zmC"/>
                             <constraint firstItem="4Ds-77-KJ2" firstAttribute="leading" secondItem="LzG-K2-LU8" secondAttribute="leading" id="JgQ-P8-ICO"/>
                             <constraint firstItem="53r-xX-VYt" firstAttribute="leading" secondItem="LzG-K2-LU8" secondAttribute="leading" id="PE6-0f-14F"/>
+                            <constraint firstItem="KHj-bQ-HEe" firstAttribute="top" secondItem="LzG-K2-LU8" secondAttribute="top" constant="40" id="Pgd-cR-syl"/>
                             <constraint firstAttribute="trailing" secondItem="DJ9-WS-TQV" secondAttribute="trailing" id="PhG-aJ-M8a"/>
-                            <constraint firstItem="n0S-g5-tjX" firstAttribute="top" secondItem="psd-2N-gLR" secondAttribute="bottom" constant="10" id="QJZ-gN-ScW"/>
+                            <constraint firstItem="KHj-bQ-HEe" firstAttribute="leading" secondItem="LzG-K2-LU8" secondAttribute="leading" constant="20" id="RDv-r9-7RA"/>
                             <constraint firstItem="DJ9-WS-TQV" firstAttribute="leading" secondItem="LzG-K2-LU8" secondAttribute="leading" id="VIy-Co-dvY"/>
-                            <constraint firstItem="DJ9-WS-TQV" firstAttribute="top" secondItem="n0S-g5-tjX" secondAttribute="bottom" constant="20" id="VkQ-eD-6gk"/>
                             <constraint firstItem="n0S-g5-tjX" firstAttribute="centerX" secondItem="y84-3b-gbZ" secondAttribute="centerX" id="Z0f-Zl-Kuj"/>
                             <constraint firstItem="Yn1-Fd-xGA" firstAttribute="bottom" secondItem="LzG-K2-LU8" secondAttribute="bottom" id="ZOi-3R-Y5P"/>
                             <constraint firstItem="LzG-K2-LU8" firstAttribute="trailing" secondItem="psd-2N-gLR" secondAttribute="trailing" constant="20" id="fcM-XJ-Hqs"/>
                             <constraint firstItem="Yn1-Fd-xGA" firstAttribute="leading" secondItem="LzG-K2-LU8" secondAttribute="leading" id="fuQ-FA-cQf"/>
+                            <constraint firstItem="n0S-g5-tjX" firstAttribute="top" secondItem="KHj-bQ-HEe" secondAttribute="bottom" constant="40" id="iRR-Us-tuY"/>
+                            <constraint firstItem="LzG-K2-LU8" firstAttribute="trailing" secondItem="KHj-bQ-HEe" secondAttribute="trailing" constant="20" id="iWd-6i-5Cx"/>
                             <constraint firstItem="LzG-K2-LU8" firstAttribute="trailing" secondItem="n0S-g5-tjX" secondAttribute="trailing" id="ifT-JS-7io"/>
                             <constraint firstItem="53r-xX-VYt" firstAttribute="trailing" secondItem="LzG-K2-LU8" secondAttribute="trailing" id="o8K-YK-25R"/>
                             <constraint firstItem="n0S-g5-tjX" firstAttribute="leading" secondItem="y84-3b-gbZ" secondAttribute="leading" id="tiG-dN-ffs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LzG-K2-LU8"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="psd-2N-gLR"/>
+                                <exclude reference="DJ9-WS-TQV"/>
+                                <exclude reference="4Ds-77-KJ2"/>
+                                <exclude reference="Yn1-Fd-xGA"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="settings-481826_640" id="FqG-kp-sn7" userLabel="Third"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="numberOfTeams" destination="PmR-hF-yYZ" id="mEA-kV-RgB"/>
+                        <outlet property="showPastGamesSwitch" destination="daa-GG-t75" id="bxf-Qt-hYP"/>
                         <outlet property="teamOnePicker" destination="jV8-3y-wJ7" id="Rso-XI-7VQ"/>
                         <outlet property="teamThreePicker" destination="kE3-vq-qKa" id="GYD-A1-iHj"/>
                         <outlet property="teamThreeStackView" destination="4Ds-77-KJ2" id="1Hm-TV-axo"/>

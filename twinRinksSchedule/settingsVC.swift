@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 
+let passToSchedule = scheduleController()
+
 class settingsController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var leagueTeam = [leagues,teamsInit]
@@ -24,7 +26,7 @@ class settingsController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var teamTwoPicker: UIPickerView!
     @IBOutlet weak var teamThreeStackView: UIStackView!
     @IBOutlet weak var teamThreePicker: UIPickerView!
-    
+    @IBOutlet weak var showPastGamesSwitch: UISwitch!
     
 
     
@@ -126,6 +128,12 @@ class settingsController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
+    @IBAction func toggledPastGames(_ sender: UISwitch) {
+        showPastGames = showPastGamesSwitch.isOn
+        defaults.set(showPastGames, forKey: "savedShowPastGames")
+        print("Switch is \(showPastGames)")
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.teamOnePicker.dataSource = self
@@ -137,6 +145,16 @@ class settingsController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         
         //print("Number of teams in Bronze is: \(bronzeTeams.count)")
         
+        
+        if let savedShowPastGames = defaults.string(forKey: "savedShowPastGames") {
+            if savedShowPastGames == "0" {
+                showPastGamesSwitch.isOn = false
+            }
+            else {
+                showPastGamesSwitch.isOn = true
+            }
+        }
+
         if let chosenLeague1 = defaults.string(forKey: "savedLeague1") {
             for x in 0..<leagues.count {
                 if leagues[x] == chosenLeague1 {
