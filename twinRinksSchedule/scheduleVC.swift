@@ -9,6 +9,7 @@
 import UIKit
 import Fuzi
 import Alamofire
+import KeychainSwift
 
 // Defaults
 let defaults = UserDefaults()
@@ -18,6 +19,9 @@ var html = ""
 
 // Number of Leagues
 let numberOfLeagues = leagues.count - 1
+
+// Saved info
+let keychain = KeychainSwift()
 
 // Create our Dispatch Groups for Queue Handling of schedule requests
 let lookupScheduleQueue = DispatchGroup(), lookupLeisureQueue = DispatchGroup(), lookupBronzeQueue = DispatchGroup(), lookupSilvereQueue = DispatchGroup(), lookupGoldQueue = DispatchGroup(), lookupDiamondQueue = DispatchGroup()
@@ -114,6 +118,18 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         default: myTeamColor = White
         }
         print("Saved data is: \(player.shared.teamData)")
+        if let savedUsername = defaults.string(forKey: "savedUsername") {
+            let loginUsername = savedUsername
+            print("Saved Username is: \(loginUsername)")
+        }
+        else { print("No saved username present") }
+        
+        if let savedPassword = keychain.get("savedPassword") {
+            let loginPassword = savedPassword
+            print("Saved Password is: \(loginPassword)")
+        }
+        else { print("No saved password present") }
+        
         self.preparePlayerTeams()
     }
 
@@ -362,16 +378,19 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 rinkDateFormat.dateFormat = "M/d/yyyy"
                 let d1 = rinkDateFormat.date(from: leagueSchedule.gameData[x].gameDate)
-                let d2 = Date()
-                let s2 = rinkDateFormat.string(from: d2)
-                if d1! > d2 {
-                    print("Game date is in the future ... we should show")
+                //let d2 = Date()
+                let now = Date()
+                let d2 = Calendar.current.date(byAdding: .day, value: -1, to: now)
+                //let s2 = rinkDateFormat.string(from: d2!)
+                //print("Game date is: \(d1!) and Current Date is: \(d2)")
+                if d1! > d2! {
+                    //print("Game date is in the future ... we should show")
                     playerGames.gameData.append(leagueSchedule.gameData[x])
                     sampleDates.append(leagueSchedule.gameData[x].gameDate)
-                    print("On \(leagueSchedule.gameData[x].gameDayOfWeek) \(leagueSchedule.gameData[x].gameDate) at \(leagueSchedule.gameData[x].gameTime) on the \(leagueSchedule.gameData[x].gameRink) rink \(leagueSchedule.gameData[x].gameHomeTeam) is playing against \(leagueSchedule.gameData[x].gameAwayTeam)")
+                    //print("On \(leagueSchedule.gameData[x].gameDayOfWeek) \(leagueSchedule.gameData[x].gameDate) at \(leagueSchedule.gameData[x].gameTime) on the \(leagueSchedule.gameData[x].gameRink) rink \(leagueSchedule.gameData[x].gameHomeTeam) is playing against \(leagueSchedule.gameData[x].gameAwayTeam)")
                 }
                 else {
-                    print("Game date is in the past ... we should hide")
+                    //print("Game date is in the past ... we should hide")
                     if showPastGames { playerGames.gameData.append(leagueSchedule.gameData[x]) }
                 }
                 
@@ -383,16 +402,19 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                 // Store in SampleDates array
                 rinkDateFormat.dateFormat = "M/d/yyyy"
                 let d1 = rinkDateFormat.date(from: leagueSchedule.gameData[x].gameDate)
-                let d2 = Date()
-                let s2 = rinkDateFormat.string(from: d2)
-                if d1! > d2 {
-                    print("Playoff date is in the future ... we should show")
+                //let d2 = Date()
+                let now = Date()
+                let d2 = Calendar.current.date(byAdding: .day, value: -1, to: now)
+                //let s2 = rinkDateFormat.string(from: d2!)
+                //print("Game date is: \(d1!) and Current Date is: \(d2)")
+                if d1! > d2! {
+                    //print("Playoff date is in the future ... we should show")
                     playerGames.gameData.append(leagueSchedule.gameData[x])
                     sampleDates.append(leagueSchedule.gameData[x].gameDate)
-                    print("On \(leagueSchedule.gameData[x].gameDayOfWeek) \(leagueSchedule.gameData[x].gameDate) at \(leagueSchedule.gameData[x].gameTime) on the \(leagueSchedule.gameData[x].gameRink) rink \(leagueSchedule.gameData[x].gameHomeTeam) is playing against \(leagueSchedule.gameData[x].gameAwayTeam)")
+                    //print("On \(leagueSchedule.gameData[x].gameDayOfWeek) \(leagueSchedule.gameData[x].gameDate) at \(leagueSchedule.gameData[x].gameTime) on the \(leagueSchedule.gameData[x].gameRink) rink \(leagueSchedule.gameData[x].gameHomeTeam) is playing against \(leagueSchedule.gameData[x].gameAwayTeam)")
                 }
                 else {
-                    print("Playoff date is in the past ... we should hide")
+                    //print("Playoff date is in the past ... we should hide")
                     if showPastGames { playerGames.gameData.append(leagueSchedule.gameData[x]) }
                 }
             }

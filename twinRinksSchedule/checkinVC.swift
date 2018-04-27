@@ -8,6 +8,10 @@
 
 import UIKit
 import WebKit
+import KeychainSwift
+
+var loginUsername = ""
+var loginPassword = ""
 
 class checkinController: UIViewController, WKUIDelegate {
 
@@ -21,9 +25,6 @@ class checkinController: UIViewController, WKUIDelegate {
     }
     
     override func viewDidLoad() {
-        let url = URL(string: "http://www.twinrinks.com/adulthockey/subs/subs_entry.html")!
-        webView.load(URLRequest(url: url))
-        webView.allowsBackForwardNavigationGestures = true
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -35,10 +36,17 @@ class checkinController: UIViewController, WKUIDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("Page two")
+        if let savedUsername = defaults.string(forKey: "savedUsername") {
+            loginUsername = savedUsername
+        }
+        
+        if let savedPassword = keychain.get("savedPassword") {
+            loginPassword = savedPassword
+        }
+        
+        let url = URL(string: "http://twinrinks.com/adulthockey/subs/subs_entry.php?subs_data1=\(loginUsername)&subs_data2=\(loginPassword)")!
+        webView.allowsBackForwardNavigationGestures = true
+        webView.load(URLRequest(url: url))
+
     }
-
-   
-
 }
-

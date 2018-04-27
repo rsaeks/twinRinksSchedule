@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import KeychainSwift
 
 let passToSchedule = scheduleController()
 
@@ -27,6 +28,8 @@ class settingsController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var teamThreeStackView: UIStackView!
     @IBOutlet weak var teamThreePicker: UIPickerView!
     @IBOutlet weak var showPastGamesSwitch: UISwitch!
+    @IBOutlet weak var usernameText: UITextField!
+    @IBOutlet weak var passwordText: UITextField!
     
 
     
@@ -53,11 +56,17 @@ class settingsController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             teamThreeStackView.isHidden = true
         }
         else if numberOfTeams.text == "3" {
+            teamTwoStackView.isHidden = false
             teamThreeStackView.isHidden = false
         }
     }
     
 
+    @IBAction func saveUsernamePassPressed(_ sender: Any) {
+        defaults.set(usernameText.text, forKey: "savedUsername")
+        keychain.set(passwordText.text!, forKey: "savedPassword")
+        self.view.endEditing(true)
+    }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         //print("selected League: \(component)")
@@ -154,86 +163,96 @@ class settingsController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 showPastGamesSwitch.isOn = true
             }
         }
-
-        if let chosenLeague1 = defaults.string(forKey: "savedLeague1") {
-            for x in 0..<leagues.count {
-                if leagues[x] == chosenLeague1 {
-                    print("Found saved league \(leagues[x]) at index \(x)")
-                    if let chosenTeam1 = defaults.string(forKey: "savedTeam1") {
-                        switch chosenLeague1 {
-                        case "Leisure":
-                            let leisureArray = Array(leisureTeams)
-                            for y in 0..<leisureArray.count {
-                                if leisureArray[y] == chosenTeam1 {
-                                    leagueTeam = [leagues,leisureArray.sorted{ $0 < $1} ]
-                                    print("Found saved team \(chosenTeam1) at index \(y)")
-                                    teamOnePicker.selectRow(x, inComponent: 0, animated: true)
-                                    self.teamOnePicker.reloadComponent(1)
-                                    teamOnePicker.selectRow(y, inComponent: 1, animated: true)
-                                }
-                            }
-                        case "Bronze":
-                            let bronzeArray = Array(bronzeTeams)
-                            for y in 0..<bronzeArray.count {
-                                if bronzeArray[y] == chosenTeam1 {
-                                    leagueTeam = [leagues,bronzeArray.sorted{ $0 < $1} ]
-                                    print("Found saved team \(chosenTeam1) at index \(y)")
-                                    teamOnePicker.selectRow(x, inComponent: 0, animated: true)
-                                    self.teamOnePicker.reloadComponent(1)
-                                    teamOnePicker.selectRow(y, inComponent: 1, animated: true)
-                                }
-                            }
-                        case "Silver":
-                            let silverArray = Array(silverTeams)
-                            for y in 0..<silverArray.count {
-                                if silverArray[y] == chosenTeam1 {
-                                    print("Found saved team \(chosenTeam1) at index \(y)")
-                                    leagueTeam = [leagues,silverArray.sorted{ $0 < $1} ]
-                                    teamOnePicker.selectRow(x, inComponent: 0, animated: true)
-                                    self.teamOnePicker.reloadComponent(1)
-                                    teamOnePicker.selectRow(y, inComponent: 1, animated: true)
-                                }
-                            }
-                        case "Gold":
-                            let goldArray = Array(goldTeams)
-                            for y in 0..<goldArray.count {
-                                if goldArray[y] == chosenTeam1 {
-                                    leagueTeam = [leagues,goldArray.sorted{ $0 < $1} ]
-                                    print("Found saved team \(chosenTeam1) at index \(y)")
-                                    teamOnePicker.selectRow(x, inComponent: 0, animated: true)
-                                    self.teamOnePicker.reloadComponent(1)
-                                    teamOnePicker.selectRow(y, inComponent: 1, animated: true)
-                                }
-                            }
-                        case "Platinum":
-                            let platinumArray = Array(platinumTeams)
-                            for y in 0..<platinumArray.count {
-                                if platinumArray[y] == chosenTeam1 {
-                                    leagueTeam = [leagues,platinumArray.sorted{ $0 < $1} ]
-                                    print("Found saved team \(chosenTeam1) at index \(y)")
-                                    teamOnePicker.selectRow(x, inComponent: 0, animated: true)
-                                    self.teamOnePicker.reloadComponent(1)
-                                    teamOnePicker.selectRow(y, inComponent: 1, animated: true)
-                                }
-                            }
-                        case "Diamond":
-                            let diamondArray = Array(diamondTeams)
-                            for y in 0..<diamondArray.count {
-                                if diamondArray[y] == chosenTeam1 {
-                                    leagueTeam = [leagues,diamondArray.sorted{ $0 < $1} ]
-                                    print("Found saved team \(chosenTeam1) at index \(y)")
-                                    teamOnePicker.selectRow(x, inComponent: 0, animated: true)
-                                    self.teamOnePicker.reloadComponent(1)
-                                    teamOnePicker.selectRow(y, inComponent: 1, animated: true)
-                                }
-                            }
-                        default:
-                            print("Unhandled Case")
-                        }
-                    }
-                    //print("Found saved league \(leagues[x]) at index \(x)")
-                }
-            }
+        
+        if let savedUsername = defaults.string(forKey: "savedUsername") {
+            usernameText.text = savedUsername
+            print("Saved Username is: \(savedUsername)")
         }
+        
+        if let savedPassword = keychain.get("savedPassword") {
+            passwordText.text = savedPassword
+            print("Saved Password is: \(savedPassword)")
+        }
+
+//        if let chosenLeague1 = defaults.string(forKey: "savedLeague1") {
+//            for x in 0..<leagues.count {
+//                if leagues[x] == chosenLeague1 {
+//                    print("Found saved league \(leagues[x]) at index \(x)")
+//                    if let chosenTeam1 = defaults.string(forKey: "savedTeam1") {
+//                        switch chosenLeague1 {
+//                        case "Leisure":
+//                            let leisureArray = Array(leisureTeams)
+//                            for y in 0..<leisureArray.count {
+//                                if leisureArray[y] == chosenTeam1 {
+//                                    leagueTeam = [leagues,leisureArray.sorted{ $0 < $1} ]
+//                                    print("Found saved team \(chosenTeam1) at index \(y)")
+//                                    teamOnePicker.selectRow(x, inComponent: 0, animated: true)
+//                                    self.teamOnePicker.reloadComponent(1)
+//                                    teamOnePicker.selectRow(y, inComponent: 1, animated: true)
+//                                }
+//                            }
+//                        case "Bronze":
+//                            let bronzeArray = Array(bronzeTeams)
+//                            for y in 0..<bronzeArray.count {
+//                                if bronzeArray[y] == chosenTeam1 {
+//                                    leagueTeam = [leagues,bronzeArray.sorted{ $0 < $1} ]
+//                                    print("Found saved team \(chosenTeam1) at index \(y)")
+//                                    teamOnePicker.selectRow(x, inComponent: 0, animated: true)
+//                                    self.teamOnePicker.reloadComponent(1)
+//                                    teamOnePicker.selectRow(y, inComponent: 1, animated: true)
+//                                }
+//                            }
+//                        case "Silver":
+//                            let silverArray = Array(silverTeams)
+//                            for y in 0..<silverArray.count {
+//                                if silverArray[y] == chosenTeam1 {
+//                                    print("Found saved team \(chosenTeam1) at index \(y)")
+//                                    leagueTeam = [leagues,silverArray.sorted{ $0 < $1} ]
+//                                    teamOnePicker.selectRow(x, inComponent: 0, animated: true)
+//                                    self.teamOnePicker.reloadComponent(1)
+//                                    teamOnePicker.selectRow(y, inComponent: 1, animated: true)
+//                                }
+//                            }
+//                        case "Gold":
+//                            let goldArray = Array(goldTeams)
+//                            for y in 0..<goldArray.count {
+//                                if goldArray[y] == chosenTeam1 {
+//                                    leagueTeam = [leagues,goldArray.sorted{ $0 < $1} ]
+//                                    print("Found saved team \(chosenTeam1) at index \(y)")
+//                                    teamOnePicker.selectRow(x, inComponent: 0, animated: true)
+//                                    self.teamOnePicker.reloadComponent(1)
+//                                    teamOnePicker.selectRow(y, inComponent: 1, animated: true)
+//                                }
+//                            }
+//                        case "Platinum":
+//                            let platinumArray = Array(platinumTeams)
+//                            for y in 0..<platinumArray.count {
+//                                if platinumArray[y] == chosenTeam1 {
+//                                    leagueTeam = [leagues,platinumArray.sorted{ $0 < $1} ]
+//                                    print("Found saved team \(chosenTeam1) at index \(y)")
+//                                    teamOnePicker.selectRow(x, inComponent: 0, animated: true)
+//                                    self.teamOnePicker.reloadComponent(1)
+//                                    teamOnePicker.selectRow(y, inComponent: 1, animated: true)
+//                                }
+//                            }
+//                        case "Diamond":
+//                            let diamondArray = Array(diamondTeams)
+//                            for y in 0..<diamondArray.count {
+//                                if diamondArray[y] == chosenTeam1 {
+//                                    leagueTeam = [leagues,diamondArray.sorted{ $0 < $1} ]
+//                                    print("Found saved team \(chosenTeam1) at index \(y)")
+//                                    teamOnePicker.selectRow(x, inComponent: 0, animated: true)
+//                                    self.teamOnePicker.reloadComponent(1)
+//                                    teamOnePicker.selectRow(y, inComponent: 1, animated: true)
+//                                }
+//                            }
+//                        default:
+//                            print("Unhandled Case")
+//                        }
+//                    }
+                    //print("Found saved league \(leagues[x]) at index \(x)")
+//                }
+//            }
+//        }
     }
 }

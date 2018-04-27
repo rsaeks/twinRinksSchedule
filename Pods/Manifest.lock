@@ -1,15 +1,24 @@
 PODS:
   - Alamofire (4.6.0)
   - Fuzi (2.0.1)
+  - KeychainSwift (11.0.0)
 
 DEPENDENCIES:
   - Alamofire
   - Fuzi
+  - KeychainSwift
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - Fuzi
+    - KeychainSwift
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   Fuzi: f64983dea705491d3aedd32351247a09523e7efd
+  KeychainSwift: bea6bd9f98af7b8d7ca4aa79fe105c00fab532db
 
-PODFILE CHECKSUM: 03d51464d0eac588c5c4d78580faecec6b547d4b
+PODFILE CHECKSUM: 26f53f6d63e4c147bc10e8d9c4c6951659043310
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

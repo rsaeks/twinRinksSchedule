@@ -7,5 +7,6 @@ target 'twinRinksSchedule' do
 
   # Pods for twinRinksSchedule
   pod 'Fuzi';
-  pod 'Alamofire'
+  pod 'Alamofire';
+  pod 'KeychainSwift'
 end
