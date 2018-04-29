@@ -43,13 +43,14 @@ let rinkDateFormat = DateFormatter()
 // Debug varibles
 var myTeamColor: CGColor = White
 
-var showPastGames = true
+var showPastGames = false
 
 class scheduleController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var playerLeagueLabel: UILabel!
     @IBOutlet weak var giantLabel: UILabel!
     @IBOutlet weak var scheduleTableView: UITableView!
+    @IBOutlet weak var showPastGamesSwitch: UISwitch!
     
     override func viewDidLoad() {
 //        print("View did load")
@@ -129,7 +130,6 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
             print("Saved Password is: \(loginPassword)")
         }
         else { print("No saved password present") }
-        
         self.preparePlayerTeams()
     }
 
@@ -427,7 +427,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         allGamesLabel = allGamesLabel + playerGames.gameData[x].gameLeague + " " + playerGames.gameData[x].gameDayOfWeek + " " + playerGames.gameData[x].gameDate + " " + playerGames.gameData[x].gameTime + " " + playerGames.gameData[x].gameRink + " " + playerGames.gameData[x].gameHomeTeam + " " + playerGames.gameData[x].gameAwayTeam + "\n"
         }
         
-        giantLabel.text = allGamesLabel
+        //giantLabel.text = allGamesLabel
         self.scheduleTableView.reloadData()
         
         // Setup our date format here
@@ -447,6 +447,14 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         print("TableView - number of runs in section is: \(playerGames.gameData.count)")
         return playerGames.gameData.count
     }
+    
+    @IBAction func showPastGamesToggled(_ sender: Any) {
+            showPastGames = showPastGamesSwitch.isOn
+            defaults.set(showPastGames, forKey: "savedShowPastGames")
+            print("Switch is \(showPastGames)")
+            self.preparePlayerTeams()
+        }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "gameCell") as? ScheduleTableViewCell {

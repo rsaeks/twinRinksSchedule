@@ -27,7 +27,6 @@ class settingsController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var teamTwoPicker: UIPickerView!
     @IBOutlet weak var teamThreeStackView: UIStackView!
     @IBOutlet weak var teamThreePicker: UIPickerView!
-    @IBOutlet weak var showPastGamesSwitch: UISwitch!
     @IBOutlet weak var usernameText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
     
@@ -137,12 +136,7 @@ class settingsController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
-    @IBAction func toggledPastGames(_ sender: UISwitch) {
-        showPastGames = showPastGamesSwitch.isOn
-        defaults.set(showPastGames, forKey: "savedShowPastGames")
-        print("Switch is \(showPastGames)")
-        
-    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.teamOnePicker.dataSource = self
@@ -153,16 +147,7 @@ class settingsController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         self.teamThreePicker.delegate = self
         
         //print("Number of teams in Bronze is: \(bronzeTeams.count)")
-        
-        
-        if let savedShowPastGames = defaults.string(forKey: "savedShowPastGames") {
-            if savedShowPastGames == "0" {
-                showPastGamesSwitch.isOn = false
-            }
-            else {
-                showPastGamesSwitch.isOn = true
-            }
-        }
+    
         
         if let savedUsername = defaults.string(forKey: "savedUsername") {
             usernameText.text = savedUsername
